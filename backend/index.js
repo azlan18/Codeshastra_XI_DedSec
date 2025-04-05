@@ -4,7 +4,6 @@ const dotenv = require("dotenv");
 const { Pinecone } = require("@pinecone-database/pinecone");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { HfInference } = require("@huggingface/inference");
-const mailRoutes = require("./routes/mail");
 // Load environment variables
 dotenv.config();
 
@@ -29,11 +28,12 @@ const connectDB = require("./config/db");
 // Connect to MongoDB and start the server
 const startServer = async () => {
   await connectDB(); // Wait for DB connection before starting server
-
+  
   // Routes
   const ragRoutes = require("./routes/rag");
   const mockRoutes = require("./routes/mockRoutes");
-
+  const mailRoutes = require("./routes/mail");
+  
   app.use("/api/rag", ragRoutes);
   app.use("/api/mock", mockRoutes);
   app.use("/api/mail", mailRoutes)
