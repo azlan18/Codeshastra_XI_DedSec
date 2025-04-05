@@ -498,22 +498,8 @@ export default function EmployeeDashboard() {
       <div className="flex-1 overflow-auto">
         {activeView === "tickets" && (
           <div className="p-6">
-            <div className="flex justify-between items-center mb-6">
+            <div className="mb-6">
               <h2 className="text-2xl font-bold">Tickets</h2>
-              <div className="flex items-center space-x-2">
-                <button
-                  className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
-                >
-                  <Clock className="h-4 w-4 mr-2" />
-                  Recent
-                </button>
-                <button
-                  className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
-                >
-                  <FileText className="h-4 w-4 mr-2" />
-                  All
-                </button>
-              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
