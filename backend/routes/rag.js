@@ -1,6 +1,6 @@
-const express = require("express");
-const router = express.Router();
-const fetch = require("node-fetch"); // Ensure you have node-fetch installed (`npm install node-fetch@2`)
+const express = require("express")
+const router = express.Router()
+const fetch = require("node-fetch") // Ensure you have node-fetch installed (`npm install node-fetch@2`)
 
 // System prompt for Gemini response generation
 const createSystemPrompt = (context) => `
@@ -15,24 +15,24 @@ APPROACH:
 3. If the context lacks sufficient info, say so and offer general guidance.
 4. Maintain a professional, helpful tone.
 5. If your response involves any numerical data that could be visualized (e.g., financial metrics over time, departmental comparisons, regional performance), ensure you structure this data clearly.
-`;
+`
 
 // Function to query Pinecone and generate response (reused across endpoints)
 async function queryNamespaceAndGenerateResponse(req, res, namespace) {
-  const { query } = req.body;
-  if (!query) return res.status(400).json({ error: "Query is required" });
+  const { query } = req.body
+  if (!query) return res.status(400).json({ error: "Query is required" })
 
   try {
-    const hf = req.app.locals.hf;
-    const genAI = req.app.locals.genAI;
-    const index = req.app.locals.pinecone.Index("index-one");
+    const hf = req.app.locals.hf
+    const genAI = req.app.locals.genAI
+    const index = req.app.locals.pinecone.Index("index-one")
 
     // Generate query embedding
     const embeddingResponse = await hf.featureExtraction({
       model: "mixedbread-ai/mxbai-embed-large-v1",
       inputs: query,
-    });
-    const queryEmbedding = embeddingResponse;
+    })
+    const queryEmbedding = embeddingResponse
 
     // Query Pinecone with the specified namespace
     const queryResponse = await index.namespace(namespace).query({
@@ -40,22 +40,22 @@ async function queryNamespaceAndGenerateResponse(req, res, namespace) {
       topK: 5,
       includeMetadata: true,
       includeValues: false,
-    });
+    })
 
     // Extract context from matches
     const context = queryResponse.matches
       .map((match, index) => {
-        const idParts = match.id.split('-');
-        const docName = idParts[0].replace(/_/g, ' ');
-        const content = match.metadata?.chunk || "No content available";
-        return `[${index + 1}] ${docName} (Score: ${match.score.toFixed(2)}):\n${content}`;
+        const idParts = match.id.split("-")
+        const docName = idParts[0].replace(/_/g, " ")
+        const content = match.metadata?.chunk || "No content available"
+        return `[${index + 1}] ${docName} (Score: ${match.score.toFixed(2)}):\n${content}`
       })
-      .join("\n\n");
+      .join("\n\n")
 
-    console.log(`Context retrieved from Pinecone (${namespace}):`, context.substring(0, 300) + "...");
+    console.log(`Context retrieved from Pinecone (${namespace}):`, context.substring(0, 300) + "...")
 
     // Use Gemini to generate response
-    const geminiModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const geminiModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
     const structuredPrompt = `
     Analyze the following query and context to determine if visualization would be helpful.
     
@@ -76,7 +76,7 @@ async function queryNamespaceAndGenerateResponse(req, res, namespace) {
     3. For any visualizable data, extract it in a structured format.
     4. Format numeric values properly (e.g., convert "10%" to 10 as a number).
     5. For growth metrics, include both the current value and historical values when available.
-    `;
+    `
 
     const result = await geminiModel.generateContent({
       contents: [{ role: "user", parts: [{ text: structuredPrompt }] }],
@@ -87,7 +87,10 @@ async function queryNamespaceAndGenerateResponse(req, res, namespace) {
           type: "OBJECT",
           properties: {
             textResponse: { type: "STRING", description: "The detailed text response to the user query" },
-            hasVisualizations: { type: "BOOLEAN", description: "Whether the response contains data that could be visualized" },
+            hasVisualizations: {
+              type: "BOOLEAN",
+              description: "Whether the response contains data that could be visualized",
+            },
             visualizations: {
               type: "ARRAY",
               items: {
@@ -127,20 +130,20 @@ async function queryNamespaceAndGenerateResponse(req, res, namespace) {
           required: ["textResponse", "hasVisualizations"],
         },
       },
-    });
+    })
 
-    const responseData = JSON.parse(result.response.text());
-    res.json(responseData);
+    const responseData = JSON.parse(result.response.text())
+    res.json(responseData)
   } catch (error) {
-    console.error(`RAG error in ${namespace}:`, error);
-    res.status(500).json({ error: "Failed to process query", details: error.message });
+    console.error(`RAG error in ${namespace}:`, error)
+    res.status(500).json({ error: "Failed to process query", details: error.message })
   }
 }
 
 // Root endpoint to classify the query, check access, and route to namespace
 router.post("/", async (req, res) => {
-  const { query } = req.body;
-  if (!query) return res.status(400).json({ error: "Query is required" });
+  const { query } = req.body
+  if (!query) return res.status(400).json({ error: "Query is required" })
 
   try {
     // Step 1: Check access with the Python backend
@@ -148,27 +151,27 @@ router.post("/", async (req, res) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query }),
-    });
+    })
 
-    const accessData = await accessResponse.json();
+    const accessData = await accessResponse.json()
     if (!accessResponse.ok) {
-      throw new Error(accessData.error || "Failed to check access");
+      throw new Error(accessData.error || "Failed to check access")
     }
 
-    const isApproved = accessData.final_decision.approved;
-    console.log(`Access check for query "${query}": ${isApproved ? "Approved" : "Denied"}`);
+    const isApproved = accessData.final_decision.approved
+    console.log(`Access check for query "${query}": ${isApproved ? "Approved" : "Denied"}`)
 
     if (!isApproved) {
       return res.status(403).json({
         error: "Access denied",
         details: accessData.final_decision.reason,
         accessResponse: accessData,
-      });
+      })
     }
 
     // Step 2: Classify the query with Gemini if access is approved
-    const genAI = req.app.locals.genAI;
-    const geminiModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const genAI = req.app.locals.genAI
+    const geminiModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
 
     const classificationPrompt = `
     Given the following user query, determine which namespace it most likely pertains to from the following options:
@@ -184,7 +187,7 @@ router.post("/", async (req, res) => {
     INSTRUCTIONS:
     1. Analyze the query and select the most relevant namespace based on its content.
     2. Return only the namespace name as a string.
-    `;
+    `
 
     const result = await geminiModel.generateContent({
       contents: [{ role: "user", parts: [{ text: classificationPrompt }] }],
@@ -192,10 +195,10 @@ router.post("/", async (req, res) => {
         temperature: 0.1,
         responseMimeType: "text/plain",
       },
-    });
+    })
 
-    const namespace = result.response.text().trim();
-    console.log(`Classified query "${query}" to namespace: ${namespace}`);
+    const namespace = result.response.text().trim()
+    console.log(`Classified query "${query}" to namespace: ${namespace}`)
 
     // Step 3: Route to the appropriate endpoint
     const endpointMap = {
@@ -204,44 +207,45 @@ router.post("/", async (req, res) => {
       "legal-doc": "/legal-doc",
       "sales-pitch": "/sales-pitch",
       "hr-policies": "/hr-policies",
-    };
-
-    if (!endpointMap[namespace]) {
-      return res.status(400).json({ error: `Invalid namespace determined: ${namespace}` });
     }
 
-    const endpoint = endpointMap[namespace];
-    req.url = endpoint; // Modify the request URL
-    router.handle(req, res); // Re-handle the request with the new endpoint
+    if (!endpointMap[namespace]) {
+      return res.status(400).json({ error: `Invalid namespace determined: ${namespace}` })
+    }
+
+    const endpoint = endpointMap[namespace]
+    req.url = endpoint // Modify the request URL
+    router.handle(req, res) // Re-handle the request with the new endpoint
   } catch (error) {
-    console.error("Error in root endpoint:", error);
-    res.status(500).json({ error: "Failed to process request", details: error.message });
+    console.error("Error in root endpoint:", error)
+    res.status(500).json({ error: "Failed to process request", details: error.message })
   }
-});
+})
 
 // Endpoint for financial-summary
 router.post("/financial-summary", async (req, res) => {
-  await queryNamespaceAndGenerateResponse(req, res, "financial-summary");
-});
+  await queryNamespaceAndGenerateResponse(req, res, "financial-summary")
+})
 
 // Endpoint for annual-report
 router.post("/annual-report", async (req, res) => {
-  await queryNamespaceAndGenerateResponse(req, res, "annual-report");
-});
+  await queryNamespaceAndGenerateResponse(req, res, "annual-report")
+})
 
 // Endpoint for legal-doc
 router.post("/legal-doc", async (req, res) => {
-  await queryNamespaceAndGenerateResponse(req, res, "legal-doc");
-});
+  await queryNamespaceAndGenerateResponse(req, res, "legal-doc")
+})
 
 // Endpoint for sales-pitch
 router.post("/sales-pitch", async (req, res) => {
-  await queryNamespaceAndGenerateResponse(req, res, "sales-pitch");
-});
+  await queryNamespaceAndGenerateResponse(req, res, "sales-pitch")
+})
 
 // Endpoint for hr-policies
 router.post("/hr-policies", async (req, res) => {
-  await queryNamespaceAndGenerateResponse(req, res, "hr-policies");
-});
+  await queryNamespaceAndGenerateResponse(req, res, "hr-policies")
+})
 
-module.exports = router;
+module.exports = router
+

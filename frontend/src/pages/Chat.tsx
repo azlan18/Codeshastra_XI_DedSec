@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Send, Copy, Download, ThumbsUp, ThumbsDown, Menu, Loader2, BarChart, Lock } from "lucide-react"
+import { Send, Copy, Download, ThumbsUp, ThumbsDown, Menu, Loader2, BarChart, Lock } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import ReactMarkdown from "react-markdown"
 import { motion, AnimatePresence } from "framer-motion"
@@ -35,6 +35,7 @@ interface Message {
   visualizations?: Visualization[]
   isAccessDenied?: boolean
   denialReason?: string
+  appealSent?: boolean
 }
 
 interface Visualization {
@@ -64,11 +65,14 @@ const GROWTH_NEGATIVE_COLOR = '#ef4444';
 export default function Chat() {
   const [input, setInput] = useState("")
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
-  const [messages, setMessages] = useState<Message[]>([]) // Fixed here
+  const [messages, setMessages] = useState<Message[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const [empId, setEmpId] = useState("");
+  const [isSending, setIsSending] = useState(false);
+  const [currentMessageId, setCurrentMessageId] = useState<string | null>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -77,6 +81,30 @@ export default function Chat() {
   useEffect(() => {
     scrollToBottom()
   }, [messages])
+
+  const sendAppealEmail = async (query: string, empId: string) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/mail/to-admin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to: "sahil.g.sharma7@gmail.com", // As specified by the user
+          subject: "Access Request Appeal",
+          text: `I need access to information related to: "${query}"`,
+          empId: empId
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send appeal");
+      }
+      
+      return true;
+    } catch (error) {
+      console.error("Error sending appeal:", error);
+      return false;
+    }
+  };
 
   const handleSendMessage = async () => {
     if (!input.trim() || isLoading) return
@@ -111,6 +139,7 @@ export default function Chat() {
             timestamp: new Date().toLocaleTimeString(),
             isAccessDenied: true,
             denialReason: data.details || "No specific reason provided.",
+            appealSent: false
           }
           setMessages((prev) => [...prev, assistantMessage])
         } else {
@@ -149,6 +178,102 @@ export default function Chat() {
     navigator.clipboard.writeText(content)
     alert("Copied to clipboard")
   }
+
+  const handleAppeal = async (messageId: string, query: string) => {
+    if (!empId.trim()) {
+      alert("Please enter your Employee ID");
+      return;
+    }
+    
+    setIsSending(true);
+    setCurrentMessageId(messageId);
+    const success = await sendAppealEmail(query, empId);
+    setIsSending(false);
+    setCurrentMessageId(null);
+    
+    if (success) {
+      // Update the message to show appeal sent
+      setMessages(prev => 
+        prev.map(msg => 
+          msg.id === messageId
+            ? { ...msg, appealSent: true } 
+            : msg
+        )
+      );
+    } else {
+      alert("Failed to send appeal. Please try again.");
+    }
+  };
+
+  const renderAccessDeniedCard = (message: Message) => {
+    const isSendingForThisMessage = isSending && currentMessageId === message.id;
+    
+    return (
+      <div className="mt-4 rounded-lg overflow-hidden border border-red-200 shadow-sm">
+        <div className="bg-gradient-to-r from-red-600 to-blue-600 p-1">
+          <div className="bg-white dark:bg-gray-900 p-4 rounded-t-lg">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2 bg-red-100 rounded-full">
+                <Lock className="h-5 w-5 text-red-600" />
+              </div>
+              <h3 className="font-semibold text-lg">Access Denied</h3>
+            </div>
+            
+            <div className="mb-4">
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">Your request:</p>
+              <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 text-sm">
+                {message.content}
+              </div>
+            </div>
+            
+            <div className="mb-4">
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">Reason for denial:</p>
+              <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border border-red-100 dark:border-red-800 text-sm text-red-800 dark:text-red-300">
+                {message.denialReason}
+              </div>
+            </div>
+            
+            {!message.appealSent ? (
+              <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
+                <p className="text-sm font-medium mb-3">Need access? Send an appeal to the administrator</p>
+                <div className="flex gap-2 mb-3">
+                  <input
+                    type="text"
+                    value={empId}
+                    onChange={(e) => setEmpId(e.target.value)}
+                    placeholder="Enter your Employee ID"
+                    className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm"
+                  />
+                  <Button 
+                    onClick={() => handleAppeal(message.id, message.content)} 
+                    disabled={isSendingForThisMessage || !empId.trim()}
+                    className="bg-blue-600 hover:bg-blue-700 text-white"
+                  >
+                    {isSendingForThisMessage ? (
+                      <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Sending...</>
+                    ) : (
+                      "Send Appeal"
+                    )}
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
+                <div className="bg-green-50 dark:bg-green-900/20 p-3 rounded border border-green-100 dark:border-green-800 flex items-center gap-2">
+                  <div className="h-5 w-5 rounded-full bg-green-500 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3 h-3 text-white">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <span className="text-sm text-green-800 dark:text-green-300">Appeal sent successfully! The administrator will review your request.</span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   const renderVisualization = (visualization: Visualization) => {
     const { type, title, subtitle, xAxisLabel, yAxisLabel, data, timeSeriesData, growthRate } = visualization
@@ -322,13 +447,15 @@ export default function Chat() {
                       {message.role === "assistant" ? (
                         <div className="prose prose-sm max-w-none">
                           {message.isAccessDenied ? (
-                            <div className="flex items-start gap-2">
-                              <Lock className="h-5 w-5 mt-1" />
-                              <div>
-                                <ReactMarkdown>{message.content}</ReactMarkdown>
-                                <p className="text-sm mt-2">Reason: {message.denialReason}</p>
+                            <>
+                              <div className="flex items-start gap-2">
+                                <Lock className="h-5 w-5 mt-1" />
+                                <div>
+                                  <ReactMarkdown>{message.content}</ReactMarkdown>
+                                </div>
                               </div>
-                            </div>
+                              {renderAccessDeniedCard(message)}
+                            </>
                           ) : (
                             <>
                               <ReactMarkdown
