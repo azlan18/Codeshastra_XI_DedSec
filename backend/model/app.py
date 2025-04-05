@@ -17,7 +17,7 @@ anomaly_preprocessor = joblib.load('anomaly_preprocessor.pkl')
 print("Models and preprocessors loaded")
 
 # Configure Gemini API
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+genai.configure(api_key="AIzaSyDq3W6bcmtED-s0vDKmSBZr8uIwy4Gc1Io")
 gemini_model = genai.GenerativeModel('gemini-1.5-flash')
 
 # Predefined options
@@ -30,7 +30,7 @@ data = {
     "user_role": "Intern",
     "department": "Engineering",
     "employee_status": "Part-time",
-    "resource_sensitivity": "confidential",
+    "resource_sensitivity": "",
     "past_violations": 2,
     "time_in_position": "6 months",
     "last_security_training": "Never",
@@ -239,4 +239,4 @@ def health_check():
     return jsonify({"status": "healthy", "models_loaded": True})
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)

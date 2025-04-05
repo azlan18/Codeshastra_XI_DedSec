@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const { Pinecone } = require("@pinecone-database/pinecone");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { HfInference } = require("@huggingface/inference");
-
+const mailRoutes = require("./routes/mail");
 // Load environment variables
 dotenv.config();
 
@@ -23,11 +23,28 @@ app.locals.pinecone = pinecone;
 app.locals.genAI = genAI;
 app.locals.hf = hf;
 
-// Routes
-const ragRoutes = require("./routes/rag");
-app.use("/api/rag", ragRoutes);
+// Database connection
+const connectDB = require("./config/db");
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Connect to MongoDB and start the server
+const startServer = async () => {
+  await connectDB(); // Wait for DB connection before starting server
+
+  // Routes
+  const ragRoutes = require("./routes/rag");
+  const mockRoutes = require("./routes/mockRoutes");
+
+  app.use("/api/rag", ragRoutes);
+  app.use("/api/mock", mockRoutes);
+  app.use("/api/mail", mailRoutes)
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+};
+
+// Start the server
+startServer().catch((error) => {
+  console.error("Failed to start server:", error);
+  process.exit(1);
 });

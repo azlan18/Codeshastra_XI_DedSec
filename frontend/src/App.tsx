@@ -1,16 +1,14 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Send, Copy, Download, ThumbsUp, ThumbsDown, Menu, Loader2, BarChart, LineChart, PieChart } from "lucide-react"
+import { Send, Copy, Download, ThumbsUp, ThumbsDown, Menu, Loader2, BarChart, Lock } from "lucide-react"
 import { cn } from "@/lib/utils"
 import ReactMarkdown from "react-markdown"
 import { motion, AnimatePresence } from "framer-motion"
-// Import recharts components
 import {
   BarChart as ReBarChart,
   Bar,
@@ -35,6 +33,8 @@ interface Message {
   content: string
   timestamp: string
   visualizations?: Visualization[]
+  isAccessDenied?: boolean // New field to flag access denied messages
+  denialReason?: string   // Reason for denial
 }
 
 interface Visualization {
@@ -103,23 +103,40 @@ export default function App() {
       })
 
       const data = await response.json()
-      if (!response.ok) throw new Error(data.error || "Failed to get response")
 
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: data.textResponse,
-        timestamp: new Date().toLocaleTimeString(),
+      if (!response.ok) {
+        if (response.status === 403) {
+          // Handle access denied
+          const assistantMessage: Message = {
+            id: (Date.now() + 1).toString(),
+            role: "assistant",
+            content: "Access to this information has been denied.",
+            timestamp: new Date().toLocaleTimeString(),
+            isAccessDenied: true,
+            denialReason: data.details || "No specific reason provided.",
+          }
+          setMessages((prev) => [...prev, assistantMessage])
+        } else {
+          throw new Error(data.error || "Failed to get response")
+        }
+      } else {
+        // Handle successful response
+        const assistantMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          role: "assistant",
+          content: data.textResponse,
+          timestamp: new Date().toLocaleTimeString(),
+        }
+
+        // Add visualizations if available
+        if (data.hasVisualizations && data.visualizations && data.visualizations.length > 0) {
+          assistantMessage.visualizations = data.visualizations
+        }
+
+        setMessages((prev) => [...prev, assistantMessage])
       }
-
-      // Add visualizations if available
-      if (data.hasVisualizations && data.visualizations && data.visualizations.length > 0) {
-        assistantMessage.visualizations = data.visualizations;
-      }
-
-      setMessages((prev) => [...prev, assistantMessage])
     } catch (err) {
-      setError("Failed to fetch response. Try again.")
+      setError(`Failed to fetch response: ${err.message}. Try again.`)
       console.error(err)
     } finally {
       setIsLoading(false)
@@ -140,9 +157,8 @@ export default function App() {
 
   // Function to render the appropriate chart based on visualization type
   const renderVisualization = (visualization: Visualization) => {
-    const { type, title, subtitle, xAxisLabel, yAxisLabel, data, timeSeriesData, growthRate } = visualization;
+    const { type, title, subtitle, xAxisLabel, yAxisLabel, data, timeSeriesData, growthRate } = visualization
     
-    // Chart container
     return (
       <div className="mt-4 bg-gray-50 p-4 rounded-lg border border-gray-200">
         <div className="mb-3">
@@ -215,8 +231,8 @@ export default function App() {
           )}
         </ResponsiveContainer>
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <div className="flex h-screen bg-white">
@@ -307,80 +323,92 @@ export default function App() {
                       className={cn(
                         "p-4 rounded-lg",
                         message.role === "assistant"
-                          ? "bg-white border border-gray-200 shadow-sm"
+                          ? message.isAccessDenied
+                            ? "bg-red-50 border border-red-200 text-red-800"
+                            : "bg-white border border-gray-200 shadow-sm"
                           : "bg-blue-600 text-white",
                       )}
                     >
                       {message.role === "assistant" ? (
                         <div className="prose prose-sm max-w-none">
-                          <ReactMarkdown
-                            components={{
-                              code({ node, inline, className, children, ...props }) {
-                                if (inline) {
-                                  return (
-                                    <code className="bg-gray-100 px-1 py-0.5 rounded text-gray-800" {...props}>
-                                      {children}
-                                    </code>
-                                  )
-                                }
-                                return (
-                                  <div className="bg-gray-100 rounded-md p-3 my-2 overflow-auto">
-                                    <code className="text-gray-800" {...props}>
-                                      {children}
-                                    </code>
-                                  </div>
-                                )
-                              },
-                              p({ children }) {
-                                return <p className="mb-2 last:mb-0">{children}</p>
-                              },
-                              ul({ children }) {
-                                return <ul className="list-disc pl-6 mb-2">{children}</ul>
-                              },
-                              ol({ children }) {
-                                return <ol className="list-decimal pl-6 mb-2">{children}</ol>
-                              },
-                              li({ children }) {
-                                return <li className="mb-1">{children}</li>
-                              },
-                              h1({ children }) {
-                                return <h1 className="text-xl font-bold mb-2">{children}</h1>
-                              },
-                              h2({ children }) {
-                                return <h2 className="text-lg font-bold mb-2">{children}</h2>
-                              },
-                              h3({ children }) {
-                                return <h3 className="text-md font-bold mb-2">{children}</h3>
-                              },
-                              blockquote({ children }) {
-                                return (
-                                  <blockquote className="border-l-4 border-gray-200 pl-4 italic">{children}</blockquote>
-                                )
-                              },
-                            }}
-                          >
-                            {message.content}
-                          </ReactMarkdown>
-                          
-                          {/* Render visualizations if available */}
-                          {message.visualizations && message.visualizations.length > 0 && (
-                            <div className="mt-4 pt-4 border-t border-gray-200">
-                              <h3 className="text-md font-semibold mb-3 flex items-center gap-2">
-                                <BarChart className="h-4 w-4" /> Data Visualizations
-                              </h3>
-                              {message.visualizations.map((vis, index) => (
-                                <div key={`vis-${message.id}-${index}`} className="mb-6 last:mb-0">
-                                  {renderVisualization(vis)}
-                                </div>
-                              ))}
+                          {message.isAccessDenied ? (
+                            <div className="flex items-start gap-2">
+                              <Lock className="h-5 w-5 mt-1" />
+                              <div>
+                                <ReactMarkdown>{message.content}</ReactMarkdown>
+                                <p className="text-sm mt-2">Reason: {message.denialReason}</p>
+                              </div>
                             </div>
+                          ) : (
+                            <>
+                              <ReactMarkdown
+                                components={{
+                                  code({ node, inline, className, children, ...props }) {
+                                    if (inline) {
+                                      return (
+                                        <code className="bg-gray-100 px-1 py-0.5 rounded text-gray-800" {...props}>
+                                          {children}
+                                        </code>
+                                      )
+                                    }
+                                    return (
+                                      <div className="bg-gray-100 rounded-md p-3 my-2 overflow-auto">
+                                        <code className="text-gray-800" {...props}>
+                                          {children}
+                                        </code>
+                                      </div>
+                                    )
+                                  },
+                                  p({ children }) {
+                                    return <p className="mb-2 last:mb-0">{children}</p>
+                                  },
+                                  ul({ children }) {
+                                    return <ul className="list-disc pl-6 mb-2">{children}</ul>
+                                  },
+                                  ol({ children }) {
+                                    return <ol className="list-decimal pl-6 mb-2">{children}</ol>
+                                  },
+                                  li({ children }) {
+                                    return <li className="mb-1">{children}</li>
+                                  },
+                                  h1({ children }) {
+                                    return <h1 className="text-xl font-bold mb-2">{children}</h1>
+                                  },
+                                  h2({ children }) {
+                                    return <h2 className="text-lg font-bold mb-2">{children}</h2>
+                                  },
+                                  h3({ children }) {
+                                    return <h3 className="text-md font-bold mb-2">{children}</h3>
+                                  },
+                                  blockquote({ children }) {
+                                    return (
+                                      <blockquote className="border-l-4 border-gray-200 pl-4 italic">{children}</blockquote>
+                                    )
+                                  },
+                                }}
+                              >
+                                {message.content}
+                              </ReactMarkdown>
+                              {message.visualizations && message.visualizations.length > 0 && (
+                                <div className="mt-4 pt-4 border-t border-gray-200">
+                                  <h3 className="text-md font-semibold mb-3 flex items-center gap-2">
+                                    <BarChart className="h-4 w-4" /> Data Visualizations
+                                  </h3>
+                                  {message.visualizations.map((vis, index) => (
+                                    <div key={`vis-${message.id}-${index}`} className="mb-6 last:mb-0">
+                                      {renderVisualization(vis)}
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </>
                           )}
                         </div>
                       ) : (
                         <div className="whitespace-pre-wrap">{message.content}</div>
                       )}
                     </div>
-                    {message.role === "assistant" && (
+                    {message.role === "assistant" && !message.isAccessDenied && (
                       <div className="flex items-center gap-1">
                         <Button
                           variant="ghost"
