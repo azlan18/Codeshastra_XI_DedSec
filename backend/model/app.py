@@ -2,67 +2,46 @@ import json
 import os
 from flask import Flask, request, jsonify
 import joblib
+import pickle
 import pandas as pd
+import numpy as np
 from datetime import datetime
 import google.generativeai as genai
 import re
+from tensorflow.keras.models import load_model
 
 app = Flask(__name__)
 
 # Load models and preprocessors
-xgb_model = joblib.load('xgb_model.pkl')
-preprocessor = joblib.load('preprocessor.pkl')
-anomaly_model = joblib.load('anomaly_model.pkl')
-anomaly_preprocessor = joblib.load('anomaly_preprocessor.pkl')
+rnn_model = load_model('rnn_model_simplified.h5')
+with open('preprocessor_simplified.pkl', 'rb') as preprocessor_file:
+    preprocessor = pickle.load(preprocessor_file)
+anomaly_model = joblib.load('anomaly_model_simplified.pkl')
 print("Models and preprocessors loaded")
 
 # Configure Gemini API
-genai.configure(api_key="AIzaSyDq3W6bcmtED-s0vDKmSBZr8uIwy4Gc1Io")
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 gemini_model = genai.GenerativeModel('gemini-1.5-flash')
 
 # Predefined options
 RESOURCE_TYPES = ['doc', 'spreadsheet', 'video', 'presentation', 'pdf', 'image']
-RESOURCE_SENSITIVITY = ['confidential', 'restricted', 'public']
 REQUEST_REASONS = ['Routine check', 'Client request', 'Audit', 'Personal use', 'Urgent approval']
+RESOURCE_SENSITIVITY = ['confidential', 'restricted', 'public']
 
-# User data
+# Selected features from training script
+selected_features = [
+    'user_role', 'department', 'employee_status', 
+    'resource_sensitivity', 'request_reason', 'past_violations'
+]
+
+# User data - sample data for testing
 data = {
-    "user_role": "Intern",
-    "department": "Engineering",
-    "employee_status": "Part-time",
-    "resource_sensitivity": "",
-    "past_violations": 2,
-    "time_in_position": "6 months",
-    "last_security_training": "Never",
-    "employee_join_date": "2019-03-01"
+    "user_role": "Employee",
+    "department": "Sales",
+    "employee_status": "Full-time",
+    "past_violations": 0,
+    "request_reason": ""  # Default, will be overridden by Gemini
 }
-
-# Function to convert time_in_position to months
-def convert_to_months(time_str):
-    if pd.isna(time_str):
-        return 0
-    time_str = str(time_str).lower().strip()
-    if 'year' in time_str or 'years' in time_str:
-        years = int(re.search(r'\d+', time_str).group())
-        return years * 12
-    elif 'month' in time_str or 'months' in time_str:
-        months = int(re.search(r'\d+', time_str).group())
-        return months
-    try:
-        return int(time_str)  # Handle cases where it's already a number
-    except ValueError:
-        return 0  # Default to 0 for unparseable values
-
-# Function to calculate days since a date
-def calculate_days_since(date_str, current_date="2025-04-05"):
-    if pd.isna(date_str) or date_str == "Never" or date_str == "invalid_date":
-        return 365 * 5  # Default to 5 years if missing
-    try:
-        date_obj = datetime.strptime(date_str, "%Y-%m-%d")
-        current_date_obj = datetime.strptime(current_date, "%Y-%m-%d")
-        return (current_date_obj - date_obj).days
-    except ValueError:
-        return 365 * 5
 
 def get_gemini_response(query):
     prompt = f"""
@@ -79,6 +58,27 @@ def get_gemini_response(query):
     - resource_sensitivity: Select exactly one from [{', '.join(RESOURCE_SENSITIVITY)}]
     
     ## Classification Guidelines and Examples:
+    
+    ### Request Reasons Examples:
+    1. Routine check: Standard access needed for day-to-day operations
+       - "I need to check the standard operating procedures"
+       - "I want to access my team's regular update documents"
+    
+    2. Client request: Access needed to fulfill client needs
+       - "The client asked for information about their account"
+       - "Need to prepare a presentation for our client meeting tomorrow"
+    
+    3. Audit: Access needed for compliance or review purposes
+       - "Need to verify last quarter's financial records"
+       - "I'm conducting the annual security audit"
+    
+    4. Personal use: Non-work related access request
+       - "I want to store some personal files"
+       - "Need to check something for my personal project"
+    
+    5. Urgent approval: Time-sensitive access requirement
+       - "Need immediate access to fix a critical bug"
+       - "Emergency request for customer issue resolution"
     
     ### Resource Sensitivity Examples:
     1. Public: Information that can be freely shared with all employees
@@ -120,7 +120,7 @@ def get_gemini_response(query):
         return {
             "resource_type": "unknown",
             "request_reason": "unknown",
-            "resource_sensitivity": "unknown",
+            "resource_sensitivity": "public",  # Default to public as safest option if parsing fails
             "error": "Failed to parse Gemini response as JSON"
         }
 
@@ -129,6 +129,12 @@ def predict():
     request_data = request.get_json()
     if not request_data or 'query' not in request_data:
         return jsonify({"error": "Please provide a query"}), 400
+    
+    # Update user data if provided in request
+    if 'user_profile' in request_data:
+        for key in request_data['user_profile']:
+            if key in data:
+                data[key] = request_data['user_profile'][key]
     
     query = request_data['query']
     inferred_data = get_gemini_response(query)
@@ -141,67 +147,46 @@ def predict():
         "user_role": data["user_role"],
         "department": data["department"],
         "employee_status": data["employee_status"],
-        "resource_type": inferred_data.get("resource_type", "unknown"),
-        "resource_sensitivity": inferred_data.get("resource_sensitivity", data["resource_sensitivity"]),
-        "request_reason": inferred_data.get("request_reason", "unknown"),
-        "time_in_position": data["time_in_position"],
-        "past_violations": data["past_violations"],
-        "last_security_training": data["last_security_training"],
-        "employee_join_date": data["employee_join_date"]
+        "resource_sensitivity": inferred_data.get("resource_sensitivity", "public"),  # Now from Gemini
+        "request_reason": inferred_data.get("request_reason", data["request_reason"]),
+        "past_violations": data["past_violations"]
     }
     
     # Create DataFrame for prediction
-    input_df = pd.DataFrame([request_obj])
+    request_df = pd.DataFrame([request_obj])
+    X_req = request_df[selected_features]
     
-    # Convert time_in_position to months for the DataFrame
-    input_df['time_in_position'] = input_df['time_in_position'].apply(convert_to_months)
-    
-    # Calculate days since for date columns 
-    for col in ['last_security_training', 'employee_join_date']:
-        input_df[f'days_since_{col}'] = input_df[col].apply(calculate_days_since)
-    
-    # Create feature sets for both models
-    # For XGBoost
-    categorical_cols = ['user_role', 'department', 'employee_status', 'resource_type', 
-                         'resource_sensitivity', 'request_reason']
-    numeric_cols = ['time_in_position', 'past_violations']
-    date_derived_cols = [f'days_since_{col}' for col in ['last_security_training', 'employee_join_date']]
-    
-    xgb_features = input_df[categorical_cols + numeric_cols + date_derived_cols]
-    
-    # For anomaly model (may use the same features, but double-check)
-    anomaly_features = input_df[categorical_cols + numeric_cols + date_derived_cols]
-    
-    # Make XGBoost prediction
-    xgb_processed = preprocessor.transform(xgb_features)
-    xgb_prediction = xgb_model.predict(xgb_processed)[0]
-    xgb_prob = xgb_model.predict_proba(xgb_processed)[0][1] if hasattr(xgb_model, 'predict_proba') else None
-    
-    # Make anomaly prediction only if XGBoost approves
-    anomaly_score = None
-    anomaly_prediction = None
-    
-    if xgb_prediction == 1:
-        # Only run anomaly detection if XGBoost approved
-        anomaly_processed = anomaly_preprocessor.transform(anomaly_features)
-        anomaly_score = anomaly_model.score_samples(anomaly_processed)[0] if hasattr(anomaly_model, 'score_samples') else None
-        anomaly_prediction = anomaly_model.predict(anomaly_processed)[0]
-    
-    # Determine final prediction
-    final_prediction = 0  # Default to denial
-    anomaly_status = None
-
-    if xgb_prediction == 1:  # Only consider approval if XGBoost approves
-        if anomaly_prediction == 1:  # Normal behavior detected
-            final_prediction = 1
-            anomaly_status = "Approved - Confirmed by anomaly detection"
-        else:  # Anomaly detected
-            final_prediction = 0
-            anomaly_status = "Denied - Flagged as anomalous behavior"
-    else:
-        # XGBoost denied, no need to check anomaly
+    # Rule-based checks first
+    if request_obj["employee_status"] == "Terminated" and request_obj["resource_sensitivity"] in ["restricted", "confidential"]:
         final_prediction = 0
-        anomaly_status = "Denied by XGBoost model"
+        rule_status = "Denied - Terminated employee"
+    elif request_obj["request_reason"] == "Personal use" and request_obj["resource_sensitivity"] in ["restricted", "confidential"]:
+        final_prediction = 0
+        rule_status = "Denied - Personal use not allowed for sensitive resources"
+    else:
+        # Apply preprocessing
+        X_req_processed = preprocessor.transform(X_req)
+        n_features = X_req_processed.shape[1]
+        X_req_rnn = X_req_processed.reshape((1, 1, n_features))
+        
+        # RNN prediction
+        rnn_pred_proba = float(rnn_model.predict(X_req_rnn, verbose=0)[0][0])
+        rnn_pred = 1 if rnn_pred_proba > 0.65 else 0
+        
+        if rnn_pred == 0:
+            final_prediction = 0
+            rule_status = "Denied - Model prediction"
+        else:
+            # Anomaly detection
+            anomaly_score = int(anomaly_model.predict(X_req_processed)[0])
+            anomaly_score_value = float(anomaly_model.score_samples(X_req_processed)[0])
+            
+            if anomaly_score == -1:
+                final_prediction = 1  # Still approve but flag
+                rule_status = "Approved but flagged as anomaly"
+            else:
+                final_prediction = 1
+                rule_status = "Approved"
     
     # Prepare response
     response = {
@@ -211,24 +196,20 @@ def predict():
             "user_role": request_obj["user_role"],
             "department": request_obj["department"],
             "employee_status": request_obj["employee_status"],
-            "resource_type": request_obj["resource_type"],
+            "resource_type": inferred_data.get("resource_type", "unknown"),
             "resource_sensitivity": request_obj["resource_sensitivity"],
             "request_reason": request_obj["request_reason"],
-            "time_in_position": f"{input_df['time_in_position'].iloc[0]} months",
-            "past_violations": request_obj["past_violations"],
-            "last_security_training": request_obj["last_security_training"],
-            "employee_join_date": request_obj["employee_join_date"]
+            "past_violations": request_obj["past_violations"]
         },
         "model_outputs": {
-            "xgb_prediction": int(xgb_prediction),
-            "xgb_probability": float(xgb_prob) if xgb_prob is not None else None,
-            "anomaly_score": float(anomaly_score) if anomaly_score is not None else None,
-            "anomaly_prediction": int(anomaly_prediction) if anomaly_prediction is not None else None
+            "rnn_probability": rnn_pred_proba if 'rnn_pred_proba' in locals() else None,
+            "anomaly_score": anomaly_score_value if 'anomaly_score_value' in locals() else None,
+            "anomaly_prediction": anomaly_score if 'anomaly_score' in locals() else None
         },
         "final_decision": {
             "approved": bool(final_prediction),
-            "status": "Approved" if final_prediction else "Denied - Flagged for admin review",
-            "reason": anomaly_status
+            "status": "Approved" if final_prediction == 1 and rule_status == "Approved" else rule_status,
+            "reason": rule_status
         }
     }
     
