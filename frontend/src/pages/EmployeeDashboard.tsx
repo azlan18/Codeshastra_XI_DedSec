@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { CheckCircle, Clock, FileText, LogOut, Settings, Ticket, User, XCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { CheckCircle, Clock, FileText, LogOut, Settings, Ticket, User, XCircle, Eye, EyeOff, X } from "lucide-react";
+import axios from "axios";
 
 // Mock data for tickets
 const mockTickets = [
@@ -51,18 +52,126 @@ const mockTickets = [
   },
 ];
 
-// Mock user data
-const user = {
-  name: "Jane Smith",
-  email: "jane.smith@company.com",
-  avatar: "/placeholder.svg?height=100&width=100",
-};
+// Remove mock user data and replace with interface
+interface User {
+  _id: string;
+  name: string;
+  email: string;
+  department: string;
+  employee_status: string;
+  employee_join_date: string;
+  last_security_training: string;
+  past_violations: number;
+  resource_sensitivity: string;
+  time_in_position: string;
+  user_role: string;
+}
+
+interface PasswordForm {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+// Add this interface for Toast
+interface Toast {
+  message: string;
+  type: 'success' | 'error';
+}
+
+// Add this component at the top level of your file
+const Toast = ({ message, type, onClose }: Toast & { onClose: () => void }) => (
+  <div className={`fixed top-4 right-4 z-50 flex items-center p-4 rounded-lg shadow-lg ${
+    type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+  }`}>
+    <div className="flex items-center">
+      {type === 'success' ? (
+        <CheckCircle className="h-5 w-5 mr-2" />
+      ) : (
+        <XCircle className="h-5 w-5 mr-2" />
+      )}
+      <p className="text-sm font-medium">{message}</p>
+    </div>
+    <button
+      onClick={onClose}
+      className="ml-4 inline-flex text-gray-400 hover:text-gray-500 focus:outline-none"
+    >
+      <X className="h-5 w-5" />
+    </button>
+  </div>
+);
 
 export default function EmployeeDashboard() {
   const [activeView, setActiveView] = useState("tickets");
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [showOutput, setShowOutput] = useState(false);
   const [isPasswordDialogOpen, setIsPasswordDialogOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  
+  // Add new state for form editing
+  const [isEditing, setIsEditing] = useState(false);
+  const [editForm, setEditForm] = useState<Partial<User>>({});
+  const [passwordForm, setPasswordForm] = useState<PasswordForm>({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  });
+  const [passwordError, setPasswordError] = useState<string>('');
+  const [passwordSuccess, setPasswordSuccess] = useState<string>('');
+
+  // Add these new states near your other state declarations
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // Add this state for toast
+  const [toast, setToast] = useState<Toast | null>(null);
+
+  // Fetch user data
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        // Replace with actual user ID - you might get this from authentication context
+        const userId = "67f17cb4824dce811aecc4ed"; 
+        const response = await axios.get(`http://localhost:5000/api/users/${userId}`);
+        setUser(response.data);
+      } catch (err) {
+        setError("Failed to fetch user data");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  // Handle form changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setEditForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await axios.put(
+        `http://localhost:5000/api/users/${user?._id}`,
+        editForm
+      );
+      setUser(response.data);
+      setIsEditing(false);
+    } catch (err) {
+      setError("Failed to update user data");
+      console.error(err);
+    }
+  };
 
   const handleTicketClick = (ticket) => {
     if (selectedTicket && selectedTicket.id === ticket.id) {
@@ -78,8 +187,268 @@ export default function EmployeeDashboard() {
     setShowOutput(true);
   };
 
+  // Handle password form changes
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setPasswordForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    setPasswordError('');
+    setPasswordSuccess('');
+  };
+
+  // Add this function to show toast
+  const showToast = (message: string, type: 'success' | 'error') => {
+    setToast({ message, type });
+    // Auto-hide toast after 3 seconds
+    setTimeout(() => {
+      setToast(null);
+    }, 3000);
+  };
+
+  // Handle password update
+  const handlePasswordUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Basic validation
+    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
+      setPasswordError("New passwords don't match");
+      return;
+    }
+
+    if (passwordForm.newPassword.length < 8) {
+      setPasswordError("Password must be at least 8 characters long");
+      return;
+    }
+
+    if (passwordForm.currentPassword === passwordForm.newPassword) {
+      setPasswordError("New password must be different from current password");
+      return;
+    }
+
+    try {
+      await axios.put(`http://localhost:5000/api/users/${user?._id}/password`, {
+        currentPassword: passwordForm.currentPassword,
+        newPassword: passwordForm.newPassword
+      });
+      
+      setPasswordForm({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+      });
+      setIsPasswordDialogOpen(false);
+      showToast("Password updated successfully!", "success");
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.message || "Failed to update password";
+      setPasswordError(errorMessage);
+      showToast(errorMessage, "error");
+    }
+  };
+
+  // Replace the profile section JSX with this:
+  const renderProfile = () => {
+    if (loading) return <div className="p-6">Loading...</div>;
+    if (error) return <div className="p-6 text-red-500">{error}</div>;
+    if (!user) return <div className="p-6">No user data found</div>;
+
+    return (
+      <div className="p-6">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold">Profile</h2>
+          <button
+            onClick={() => setIsPasswordDialogOpen(true)}
+            className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700"
+          >
+            Change Password
+          </button>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+          <div className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Name</label>
+                <p className="text-gray-600 dark:text-gray-400">{user.name}</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Email</label>
+                <p className="text-gray-600 dark:text-gray-400">{user.email}</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Department</label>
+                <p className="text-gray-600 dark:text-gray-400">{user.department}</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Employee Status</label>
+                <p className="text-gray-600 dark:text-gray-400">{user.employee_status}</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Join Date</label>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {new Date(user.employee_join_date).toLocaleDateString()}
+                </p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Role</label>
+                <p className="text-gray-600 dark:text-gray-400">{user.user_role}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Replace the password dialog JSX with this updated version:
+  const renderPasswordDialog = () => (
+    <div className="fixed inset-0 z-10 overflow-y-auto">
+      <div className="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+        <div 
+          className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" 
+          onClick={() => setIsPasswordDialogOpen(false)}
+        ></div>
+        
+        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full dark:bg-gray-800">
+          <form onSubmit={handlePasswordUpdate}>
+            <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white mb-4">
+                Change Password
+              </h3>
+              
+              {passwordError && (
+                <div className="mb-4 p-2 bg-red-100 border border-red-400 text-red-700 rounded">
+                  {passwordError}
+                </div>
+              )}
+              
+              {passwordSuccess && (
+                <div className="mb-4 p-2 bg-green-100 border border-green-400 text-green-700 rounded">
+                  {passwordSuccess}
+                </div>
+              )}
+
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Current Password
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showCurrentPassword ? "text" : "password"}
+                      name="currentPassword"
+                      value={passwordForm.currentPassword}
+                      onChange={handlePasswordChange}
+                      className="w-full p-2 pr-10 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                    >
+                      {showCurrentPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    New Password
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showNewPassword ? "text" : "password"}
+                      name="newPassword"
+                      value={passwordForm.newPassword}
+                      onChange={handlePasswordChange}
+                      className="w-full p-2 pr-10 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                      required
+                      minLength={8}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowNewPassword(!showNewPassword)}
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                    >
+                      {showNewPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
+                    </button>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Password must be at least 8 characters long
+                  </p>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Confirm New Password
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showConfirmPassword ? "text" : "password"}
+                      name="confirmPassword"
+                      value={passwordForm.confirmPassword}
+                      onChange={handlePasswordChange}
+                      className="w-full p-2 pr-10 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                    >
+                      {showConfirmPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+              <button
+                type="submit"
+                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-600 text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:ml-3 sm:w-auto sm:text-sm"
+              >
+                Update Password
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsPasswordDialogOpen(false)}
+                className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+      {/* Add this line right after the opening div */}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
+
       {/* Sidebar */}
       <div className="w-20 md:w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col">
         <div className="p-4 flex items-center justify-center md:justify-start">
@@ -245,136 +614,10 @@ export default function EmployeeDashboard() {
           </div>
         )}
 
-        {activeView === "profile" && (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold mb-6">Profile</h2>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-              <div className="p-6">
-                <div className="flex flex-col md:flex-row items-center gap-6">
-                  <div className="h-24 w-24 rounded-full bg-gray-200 overflow-hidden">
-                    <img src={user.avatar} alt={user.name} />
-                  </div>
-                  <div className="space-y-2 text-center md:text-left">
-                    <h3 className="text-2xl font-bold">{user.name}</h3>
-                    <p className="text-gray-500 dark:text-gray-400">{user.email}</p>
-                    <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-                      <button
-                        onClick={() => setIsPasswordDialogOpen(true)}
-                        className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
-                      >
-                        <Settings className="h-4 w-4 mr-2" />
-                        Change Password
-                      </button>
-                      <button
-                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
-                      >
-                        <LogOut className="h-4 w-4 mr-2" />
-                        Sign Out
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <hr className="border-t border-gray-200 dark:border-gray-700" />
-              <div className="p-6">
-                <h3 className="text-lg font-semibold mb-4">Recent Activity</h3>
-                <div className="h-[300px] overflow-y-auto">
-                  <div className="space-y-4">
-                    {mockTickets.slice(0, 5).map((ticket) => (
-                      <div
-                        key={ticket.id}
-                        className="flex items-start gap-4 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50"
-                      >
-                        <div
-                          className={`p-2 rounded-full ${
-                            ticket.status === "success" ? "bg-green-100 text-green-600" : "bg-red-100 text-red-600"
-                          }`}
-                        >
-                          {ticket.status === "success" ? (
-                            <CheckCircle className="h-5 w-5" />
-                          ) : (
-                            <XCircle className="h-5 w-5" />
-                          )}
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <h4 className="font-medium">{ticket.id}</h4>
-                            <span className="text-xs text-gray-500">{ticket.date}</span>
-                          </div>
-                          <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-1">{ticket.query}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        {activeView === "profile" && renderProfile()}
       </div>
 
-      {/* Password Change Dialog */}
-      {isPasswordDialogOpen && (
-        <div className="fixed inset-0 z-10 overflow-y-auto">
-          <div className="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onClick={() => setIsPasswordDialogOpen(false)}></div>
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="sm:flex sm:items-start">
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                    <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">Change Password</h3>
-                    <div className="mt-2">
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Enter your current password and a new password below.</p>
-                    </div>
-                    <div className="mt-4 space-y-4">
-                      <div className="space-y-2">
-                        <label htmlFor="current" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Current Password</label>
-                        <input 
-                          type="password" 
-                          id="current" 
-                          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white" 
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label htmlFor="new" className="block text-sm font-medium text-gray-700 dark:text-gray-300">New Password</label>
-                        <input 
-                          type="password" 
-                          id="new" 
-                          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white" 
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label htmlFor="confirm" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Confirm New Password</label>
-                        <input 
-                          type="password" 
-                          id="confirm" 
-                          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white" 
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button
-                  type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-600 text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => setIsPasswordDialogOpen(false)}
-                >
-                  Save Changes
-                </button>
-                <button
-                  type="button"
-                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700"
-                  onClick={() => setIsPasswordDialogOpen(false)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {isPasswordDialogOpen && renderPasswordDialog()}
     </div>
   );
 }

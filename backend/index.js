@@ -33,10 +33,12 @@ const startServer = async () => {
   const ragRoutes = require("./routes/rag");
   const mockRoutes = require("./routes/mockRoutes");
   const mailRoutes = require("./routes/mail");
+  const userRoutes = require("./routes/userRoutes");
   
   app.use("/api/rag", ragRoutes);
   app.use("/api/mock", mockRoutes);
-  app.use("/api/mail", mailRoutes)
+  app.use("/api/mail", mailRoutes);
+  app.use("/api/users", userRoutes); 
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
