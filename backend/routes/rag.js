@@ -142,15 +142,16 @@ async function queryNamespaceAndGenerateResponse(req, res, namespace) {
 
 // Root endpoint to classify the query, check access, and route to namespace
 router.post("/", async (req, res) => {
-  const { query } = req.body
+  const { query, user_profile } = req.body
   if (!query) return res.status(400).json({ error: "Query is required" })
+  if (!user_profile) return res.status(400).json({ error: "User profile is required" }) // Add validation
 
   try {
     // Step 1: Check access with the Python backend
     const accessResponse = await fetch("http://localhost:5001/predict", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({ query, user_profile }) // Forward user_profile to Python backend
     })
 
     const accessData = await accessResponse.json()
@@ -248,4 +249,3 @@ router.post("/hr-policies", async (req, res) => {
 })
 
 module.exports = router
-

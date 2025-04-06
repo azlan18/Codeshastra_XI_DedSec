@@ -9,3 +9,5 @@
 # Ignore .env files
 /frontend/.env
 /backend/.env
+
+/backend/model/venv

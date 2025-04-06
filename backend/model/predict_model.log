@@ -1,0 +1,1723 @@
+2025-04-06 07:00:46,100 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-06 07:00:46,362 - INFO - Models and preprocessors loaded
+2025-04-06 07:00:46,383 - WARNING -  * Debugger is active!
+2025-04-06 07:00:46,391 - INFO -  * Debugger PIN: 134-844-422
+2025-04-06 07:01:06,338 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-06 07:01:06,556 - INFO - Models and preprocessors loaded
+2025-04-06 07:01:06,588 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://172.20.10.2:5001
+2025-04-06 07:01:06,588 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-06 07:01:06,588 - INFO -  * Restarting with stat
+2025-04-06 07:01:08,849 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-06 07:01:09,054 - INFO - Models and preprocessors loaded
+2025-04-06 07:01:09,072 - WARNING -  * Debugger is active!
+2025-04-06 07:01:09,081 - INFO -  * Debugger PIN: 134-844-422
+2025-04-06 07:01:23,796 - ERROR - Request missing user_profile
+2025-04-06 07:01:23,798 - INFO - 127.0.0.1 - - [06/Apr/2025 07:01:23] "[31m[1mPOST /predict HTTP/1.1[0m" 400 -
+2025-04-06 07:04:35,897 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-06 07:04:36,167 - INFO - Models and preprocessors loaded
+2025-04-06 07:04:36,194 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://172.20.10.2:5001
+2025-04-06 07:04:36,194 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-06 07:04:36,195 - INFO -  * Restarting with stat
+2025-04-06 07:04:38,625 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-06 07:04:38,813 - INFO - Models and preprocessors loaded
+2025-04-06 07:04:38,830 - WARNING -  * Debugger is active!
+2025-04-06 07:04:38,840 - INFO -  * Debugger PIN: 134-844-422
+2025-04-06 07:05:18,437 - INFO -  * Detected change in '/Users/azlan18/Desktop/Codeshastra_XI_DedSec/backend/model/rnn.py', reloading
+2025-04-06 07:05:18,950 - INFO -  * Restarting with stat
+2025-04-06 07:05:23,280 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-06 07:05:23,549 - INFO - Models and preprocessors loaded
+2025-04-06 07:05:23,569 - WARNING -  * Debugger is active!
+2025-04-06 07:05:23,579 - INFO -  * Debugger PIN: 134-844-422
+2025-04-06 07:12:13,130 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-06 07:12:13,404 - INFO - Models and preprocessors loaded
+2025-04-06 07:12:13,448 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://172.20.10.2:5001
+2025-04-06 07:12:13,448 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-06 07:12:13,449 - INFO -  * Restarting with stat
+2025-04-06 07:12:16,409 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-06 07:12:16,625 - INFO - Models and preprocessors loaded
+2025-04-06 07:12:16,643 - WARNING -  * Debugger is active!
+2025-04-06 07:12:16,653 - INFO -  * Debugger PIN: 134-844-422
+2025-04-06 07:12:29,197 - INFO - Received user data for query 'company finances': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 07:12:30,954 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "confidential",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 07:12:31,200 - INFO - Prediction response: {
+  "query": "company finances",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "confidential"
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Approved",
+    "reason": "Approved"
+  }
+}
+2025-04-06 07:12:31,200 - INFO - 127.0.0.1 - - [06/Apr/2025 07:12:31] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:14:08,981 - INFO - Received user data for query 'company finances': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 07:14:10,180 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "confidential",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 07:14:10,323 - INFO - Prediction response: {
+  "query": "company finances",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "confidential"
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Approved",
+    "reason": "Approved"
+  }
+}
+2025-04-06 07:14:10,323 - INFO - 127.0.0.1 - - [06/Apr/2025 07:14:10] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:15:58,174 - INFO - Received user data for query 'company finances': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 10,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 07:15:59,063 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "confidential",
+  "request_reason": "Routine check",
+  "past_violations": 10
+}
+2025-04-06 07:15:59,253 - INFO - Prediction response: {
+  "query": "company finances",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "confidential"
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 07:15:59,254 - INFO - 127.0.0.1 - - [06/Apr/2025 07:15:59] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:17:04,488 - INFO - Received user data for query 'I want to make a sales pitch to a client. Let me see the Luminex Client pitch for reference': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 10,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 07:17:05,593 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "confidential",
+  "request_reason": "Client request",
+  "past_violations": 10
+}
+2025-04-06 07:17:05,637 - INFO - Prediction response: {
+  "query": "I want to make a sales pitch to a client. Let me see the Luminex Client pitch for reference",
+  "inferred_data": {
+    "resource_type": "presentation",
+    "request_reason": "Client request",
+    "resource_sensitivity": "confidential"
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 07:17:05,638 - INFO - 127.0.0.1 - - [06/Apr/2025 07:17:05] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:18:21,631 - INFO - Received user data for query 'what are the employee benifits for me?': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 5,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 07:18:22,700 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Personal use",
+  "past_violations": 5
+}
+2025-04-06 07:18:22,702 - INFO - Prediction response: {
+  "query": "what are the employee benifits for me?",
+  "inferred_data": {
+    "resource_type": "doc",
+    "request_reason": "Personal use",
+    "resource_sensitivity": "restricted"
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Personal use not allowed for sensitive resources",
+    "reason": "Denied - Personal use not allowed for sensitive resources"
+  }
+}
+2025-04-06 07:18:22,703 - INFO - 127.0.0.1 - - [06/Apr/2025 07:18:22] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:19:12,613 - INFO - Received user data for query 'What are the company leave policies ?': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 5,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 07:19:13,339 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 5
+}
+2025-04-06 07:19:13,419 - INFO - Prediction response: {
+  "query": "What are the company leave policies ?",
+  "inferred_data": {
+    "resource_type": "doc",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted"
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 07:19:13,419 - INFO - 127.0.0.1 - - [06/Apr/2025 07:19:13] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:19:58,499 - INFO - Received user data for query 'What are the company leave policies?': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 2,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 07:19:59,338 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 2
+}
+2025-04-06 07:19:59,414 - INFO - Prediction response: {
+  "query": "What are the company leave policies?",
+  "inferred_data": {
+    "resource_type": "doc",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted"
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 07:19:59,415 - INFO - 127.0.0.1 - - [06/Apr/2025 07:19:59] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:22:29,655 - INFO -  * Detected change in '/Users/azlan18/Desktop/Codeshastra_XI_DedSec/backend/model/app.py', reloading
+2025-04-06 07:22:32,243 - INFO -  * Restarting with stat
+2025-04-06 07:22:42,036 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-06 07:22:42,298 - INFO - Models and preprocessors loaded
+2025-04-06 07:22:42,335 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://172.20.10.2:5001
+2025-04-06 07:22:42,336 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-06 07:22:42,336 - INFO -  * Restarting with stat
+2025-04-06 07:22:44,605 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-06 07:22:44,790 - INFO - Models and preprocessors loaded
+2025-04-06 07:22:44,808 - WARNING -  * Debugger is active!
+2025-04-06 07:22:44,818 - INFO -  * Debugger PIN: 134-844-422
+2025-04-06 07:23:12,727 - INFO - Received user data for query 'what are the company leave policies?': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 2,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 07:23:15,394 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "public",
+  "request_reason": "Routine check",
+  "past_violations": 2
+}
+2025-04-06 07:23:15,658 - INFO - Prediction response: {
+  "query": "what are the company leave policies?",
+  "inferred_data": {
+    "resource_type": "doc",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "public"
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Approved but flagged as anomaly",
+    "reason": "Approved but flagged as anomaly"
+  }
+}
+2025-04-06 07:23:15,658 - INFO - 127.0.0.1 - - [06/Apr/2025 07:23:15] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:23:49,496 - INFO - Received user data for query 'I want to see Q1 financials': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 2,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 07:23:51,711 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 2
+}
+2025-04-06 07:23:51,787 - INFO - Prediction response: {
+  "query": "I want to see Q1 financials",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted"
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 07:23:51,788 - INFO - 127.0.0.1 - - [06/Apr/2025 07:23:51] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:24:37,046 - INFO - Received user data for query 'our Q1 financials': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 2,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 07:24:38,098 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 2
+}
+2025-04-06 07:24:38,142 - INFO - Prediction response: {
+  "query": "our Q1 financials",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted"
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 07:24:38,142 - INFO - 127.0.0.1 - - [06/Apr/2025 07:24:38] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:24:55,453 - INFO - Received user data for query 'our Q1 financials': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 07:24:56,336 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 07:24:56,405 - INFO - Prediction response: {
+  "query": "our Q1 financials",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted"
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 07:24:56,406 - INFO - 127.0.0.1 - - [06/Apr/2025 07:24:56] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:29:52,842 - INFO - Received user data for query 'I want access to Q1 financial summary against Q2 financial summary for a client pitch': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 07:31:05,568 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "confidential",
+  "request_reason": "Client request",
+  "past_violations": 0
+}
+2025-04-06 07:31:05,807 - INFO - Prediction response: {
+  "query": "I want access to Q1 financial summary against Q2 financial summary for a client pitch",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Client request",
+    "resource_sensitivity": "confidential"
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Approved",
+    "reason": "Approved"
+  }
+}
+2025-04-06 07:31:05,807 - INFO - 127.0.0.1 - - [06/Apr/2025 07:31:05] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:36:01,225 - INFO - Received user data for query 'Compare Q1 vs Q2 performance': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 07:36:03,443 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 07:36:03,728 - INFO - Prediction response: {
+  "query": "Compare Q1 vs Q2 performance",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted"
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 07:36:03,728 - INFO - 127.0.0.1 - - [06/Apr/2025 07:36:03] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:36:37,041 - INFO - Received user data for query 'I need access to our Q1 financials, to prepare for client sales pitch': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 07:36:37,878 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "confidential",
+  "request_reason": "Client request",
+  "past_violations": 0
+}
+2025-04-06 07:36:37,968 - INFO - Prediction response: {
+  "query": "I need access to our Q1 financials, to prepare for client sales pitch",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Client request",
+    "resource_sensitivity": "confidential"
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Approved",
+    "reason": "Approved"
+  }
+}
+2025-04-06 07:36:37,969 - INFO - 127.0.0.1 - - [06/Apr/2025 07:36:37] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:38:35,203 - INFO - Received user data for query 'I need access to our Q1 financials, to prepare for client sales pitch. Also compare the Q1 vs Q2 financials': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 07:38:36,120 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "confidential",
+  "request_reason": "Client request",
+  "past_violations": 0
+}
+2025-04-06 07:38:36,205 - INFO - Prediction response: {
+  "query": "I need access to our Q1 financials, to prepare for client sales pitch. Also compare the Q1 vs Q2 financials",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Client request",
+    "resource_sensitivity": "confidential"
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Approved",
+    "reason": "Approved"
+  }
+}
+2025-04-06 07:38:36,206 - INFO - 127.0.0.1 - - [06/Apr/2025 07:38:36] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:38:58,844 - INFO - Received user data for query 'I need access to our Q1 financials, to prepare for client sales pitch. Also compare the Q1 vs Q2 financials': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 07:38:59,772 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Client request",
+  "past_violations": 0
+}
+2025-04-06 07:38:59,850 - INFO - Prediction response: {
+  "query": "I need access to our Q1 financials, to prepare for client sales pitch. Also compare the Q1 vs Q2 financials",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Client request",
+    "resource_sensitivity": "restricted"
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 07:38:59,850 - INFO - 127.0.0.1 - - [06/Apr/2025 07:38:59] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:39:39,527 - INFO - Received user data for query 'Our Q1 finances': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 07:39:40,629 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 07:39:40,671 - INFO - Prediction response: {
+  "query": "Our Q1 finances",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted"
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 07:39:40,672 - INFO - 127.0.0.1 - - [06/Apr/2025 07:39:40] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:40:36,701 - INFO - Received user data for query 'our Q1 finances': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 07:40:37,772 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 07:40:37,818 - INFO - Prediction response: {
+  "query": "our Q1 finances",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted"
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 07:40:37,819 - INFO - 127.0.0.1 - - [06/Apr/2025 07:40:37] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:52:28,285 - INFO - Received user data for query 'Show me sales by region': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 07:52:29,411 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 07:52:29,661 - INFO - Prediction response: {
+  "query": "Show me sales by region",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted"
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 07:52:29,662 - INFO - 127.0.0.1 - - [06/Apr/2025 07:52:29] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:55:24,091 - INFO -  * Detected change in '/Users/azlan18/Desktop/Codeshastra_XI_DedSec/backend/model/app.py', reloading
+2025-04-06 07:55:27,147 - INFO -  * Restarting with stat
+2025-04-06 07:55:31,562 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-06 07:55:31,840 - INFO - Models and preprocessors loaded
+2025-04-06 07:55:31,864 - WARNING -  * Debugger is active!
+2025-04-06 07:55:31,877 - INFO -  * Debugger PIN: 134-844-422
+2025-04-06 07:55:48,627 - INFO - Received user data for query 'Show me sales by region': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 07:55:50,653 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 07:55:50,886 - INFO - Prediction response: {
+  "query": "Show me sales by region",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "Azlan is a Manager in the Finance department with 7 years of experience and no past violations.  While sales data could be considered sensitive, his role and experience justify access.  However, given it's sales data (potentially containing regionally specific strategies or performance metrics), 'restricted' access within the Finance department is more appropriate than 'public' access across the whole company."
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 07:55:50,887 - INFO - 127.0.0.1 - - [06/Apr/2025 07:55:50] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:55:57,451 - INFO - Received user data for query 'What were our Q2 financial results?': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 07:55:59,069 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 07:55:59,139 - INFO - Prediction response: {
+  "query": "What were our Q2 financial results?",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "Azlan is a Finance Manager with 7 years of experience and zero past violations.  Q2 financial results are typically considered restricted information,  accessible within the Finance department.  Given his seniority and role, access is granted at the 'restricted' level. While a Manager's role and experience might usually suggest 'public' access,  financial data inherently carries a level of sensitivity."
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 07:55:59,139 - INFO - 127.0.0.1 - - [06/Apr/2025 07:55:59] "POST /predict HTTP/1.1" 200 -
+2025-04-06 07:56:53,003 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-06 07:56:53,283 - INFO - Models and preprocessors loaded
+2025-04-06 07:56:53,356 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://172.20.10.2:5001
+2025-04-06 07:56:53,356 - INFO - [33mPress CTRL+C to quit[0m
+2025-04-06 07:56:53,357 - INFO -  * Restarting with stat
+2025-04-06 07:56:56,301 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-06 07:56:56,517 - INFO - Models and preprocessors loaded
+2025-04-06 07:56:56,544 - WARNING -  * Debugger is active!
+2025-04-06 07:56:56,568 - INFO -  * Debugger PIN: 134-844-422
+2025-04-06 07:57:03,492 - INFO - Received user data for query 'Compare Q1 vs Q2 performance': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 07:57:05,049 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 07:57:05,243 - INFO - Prediction response: {
+  "query": "Compare Q1 vs Q2 performance",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "Azlan is a Manager in the Finance department with 7 years of experience and no past violations.  While Q1 vs Q2 performance comparisons could contain sensitive financial data, given his role, experience, and lack of violations, 'restricted' access is appropriate.  The information is likely relevant to his department and role, justifying access within those bounds."
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 07:57:05,243 - INFO - 127.0.0.1 - - [06/Apr/2025 07:57:05] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:00:41,808 - INFO -  * Detected change in '/Users/azlan18/Desktop/Codeshastra_XI_DedSec/backend/model/app.py', reloading
+2025-04-06 08:00:44,462 - INFO -  * Restarting with stat
+2025-04-06 08:00:48,505 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-04-06 08:00:48,768 - INFO - Models and preprocessors loaded
+2025-04-06 08:00:48,789 - WARNING -  * Debugger is active!
+2025-04-06 08:00:48,798 - INFO -  * Debugger PIN: 134-844-422
+2025-04-06 08:00:54,859 - INFO - Received user data for query 'Compare Q1 vs Q2 performance': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 08:00:57,961 - INFO - Manager bypass activated: Bypass - Manager with 7.0 years experience requesting performance data
+2025-04-06 08:00:57,962 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 08:00:57,962 - INFO - Prediction response: {
+  "query": "Compare Q1 vs Q2 performance",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "Azlan is a Manager in the Finance department with 7 years of experience and zero past violations.  While his role and experience suggest access to public resources, a Q1 vs Q2 performance comparison likely contains financial data that, while relevant to his role, isn't suitable for general distribution. Therefore, 'restricted' access within his department is appropriate."
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Bypass - Manager with 7.0 years experience requesting performance data",
+    "reason": "Bypass - Manager with 7.0 years experience requesting performance data"
+  }
+}
+2025-04-06 08:00:57,963 - INFO - 127.0.0.1 - - [06/Apr/2025 08:00:57] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:01:20,169 - INFO - Received user data for query 'What were our Q2 financial results?': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 2,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 08:01:21,624 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 2
+}
+2025-04-06 08:01:21,877 - INFO - RNN prediction probability: 0.6157862544059753
+2025-04-06 08:01:21,877 - INFO - Prediction response: {
+  "query": "What were our Q2 financial results?",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "Shubham Mourya is an intern with a part-time employee status and a history of past violations.  While the query is a routine check for Q2 financial results, his limited role and past violations necessitate a more restrictive classification than 'public'.  Financial data is inherently sensitive, and his low experience level makes 'restricted' the appropriate choice."
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 08:01:21,878 - INFO - 127.0.0.1 - - [06/Apr/2025 08:01:21] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:01:50,490 - INFO - Received user data for query 'Our Q1 finances': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 08:01:51,841 - INFO - Manager bypass activated: Bypass - Manager with 7.0 years experience requesting performance data
+2025-04-06 08:01:51,841 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 08:01:51,842 - INFO - Prediction response: {
+  "query": "Our Q1 finances",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "Azlan is a Finance Manager with 7 years of experience and zero past violations.  While his role and experience suggest broader access, Q1 finances are typically considered sensitive within a company. Therefore, 'restricted' access is appropriate, limiting access to the Finance department."
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Bypass - Manager with 7.0 years experience requesting performance data",
+    "reason": "Bypass - Manager with 7.0 years experience requesting performance data"
+  }
+}
+2025-04-06 08:01:51,843 - INFO - 127.0.0.1 - - [06/Apr/2025 08:01:51] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:02:59,568 - INFO - Received user data for query 'Show me sales by region': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 08:03:00,859 - INFO - Manager bypass activated: Bypass - Manager with 7.0 years experience requesting performance data
+2025-04-06 08:03:00,860 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 08:03:00,860 - INFO - Prediction response: {
+  "query": "Show me sales by region",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "Azlan is a Manager in the Finance department with 7 years of experience and no past violations.  Sales data by region is generally considered restricted information, as it's not for public consumption but is necessary for internal analysis within the Finance department. Given Azlan's role and experience, access to this restricted data is appropriate."
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Bypass - Manager with 7.0 years experience requesting performance data",
+    "reason": "Bypass - Manager with 7.0 years experience requesting performance data"
+  }
+}
+2025-04-06 08:03:00,860 - INFO - 127.0.0.1 - - [06/Apr/2025 08:03:00] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:03:06,420 - INFO - Received user data for query 'Show me sales by region': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 2,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 08:03:07,923 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 2
+}
+2025-04-06 08:03:08,150 - INFO - RNN prediction probability: 0.6157862544059753
+2025-04-06 08:03:08,151 - INFO - Prediction response: {
+  "query": "Show me sales by region",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "The user is an intern with a past violation history and is requesting sales data by region.  While sales data might be considered public at a high level, given the user's role, limited experience (6 months), part-time status, and past violations,  'restricted' access is more appropriate to limit the scope of data access.  This ensures data protection while allowing the intern to potentially perform their duties.  A spreadsheet is the most likely resource type for this kind of request."
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 08:03:08,151 - INFO - 127.0.0.1 - - [06/Apr/2025 08:03:08] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:03:28,738 - INFO - Received user data for query 'what is the leave policy in the organization?': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 2,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 08:03:30,008 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 2
+}
+2025-04-06 08:03:30,246 - INFO - RNN prediction probability: 0.6157862544059753
+2025-04-06 08:03:30,246 - INFO - Prediction response: {
+  "query": "what is the leave policy in the organization?",
+  "inferred_data": {
+    "resource_type": "doc",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "The user is a part-time intern with a history of past violations.  Leave policy is typically considered internal information and not freely available to all employees.  Given the user's status and violation history, 'restricted' access is appropriate to limit the scope of access to this information."
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 08:03:30,246 - INFO - 127.0.0.1 - - [06/Apr/2025 08:03:30] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:04:09,166 - INFO - Received user data for query 'When can I take a leave?': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 2,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 08:04:10,592 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Personal use",
+  "past_violations": 2
+}
+2025-04-06 08:04:10,610 - INFO - Prediction response: {
+  "query": "When can I take a leave?",
+  "inferred_data": {
+    "resource_type": "doc",
+    "request_reason": "Personal use",
+    "resource_sensitivity": "restricted",
+    "reasoning": "The user is requesting information related to their leave, which is personal information.  While not inherently sensitive, the information regarding leave policies and procedures is typically restricted within a company's HR department.  The user's status as a part-time intern with a low time in position and past violations increases the justification for a more restrictive classification.  The absence of a last security training also plays a part in this decision."
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Personal use not allowed for sensitive resources",
+    "reason": "Denied - Personal use not allowed for sensitive resources"
+  }
+}
+2025-04-06 08:04:10,610 - INFO - 127.0.0.1 - - [06/Apr/2025 08:04:10] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:05:41,969 - INFO - Received user data for query 'Was I to join this org, what are the employee benifits I would get?': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 2,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 08:05:43,603 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Personal use",
+  "past_violations": 2
+}
+2025-04-06 08:05:43,627 - INFO - Prediction response: {
+  "query": "Was I to join this org, what are the employee benifits I would get?",
+  "inferred_data": {
+    "resource_type": "pdf",
+    "request_reason": "Personal use",
+    "resource_sensitivity": "restricted",
+    "reasoning": "The user is an intern with a part-time status and has past violations.  While the query is about employee benefits, which could be considered public information for full-time employees, the user's status and past violations necessitate a more restrictive classification.  The information, while potentially available publicly to full-time employees, needs to be managed more cautiously for this user profile to mitigate potential risk."
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Personal use not allowed for sensitive resources",
+    "reason": "Denied - Personal use not allowed for sensitive resources"
+  }
+}
+2025-04-06 08:05:43,628 - INFO - 127.0.0.1 - - [06/Apr/2025 08:05:43] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:06:06,882 - INFO - Received user data for query 'what are the Workplace Policies': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 2,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 08:06:08,556 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 2
+}
+2025-04-06 08:06:08,756 - INFO - RNN prediction probability: 0.6157862544059753
+2025-04-06 08:06:08,756 - INFO - Prediction response: {
+  "query": "what are the Workplace Policies",
+  "inferred_data": {
+    "resource_type": "doc",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "Shubham Mourya is an intern with a part-time status and two past violations.  Workplace policies are generally considered restricted information, and given his limited role and past violations, access should be limited. While he's in the Engineering department,  the request is broad ('Workplace Policies'), suggesting access to a general set of policies rather than department-specific ones. His low experience level and part-time status also contribute to the 'restricted' classification."
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 08:06:08,758 - INFO - 127.0.0.1 - - [06/Apr/2025 08:06:08] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:11:04,221 - INFO - Received user data for query 'Can I view the guidelines for requesting time off as an intern': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 2,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 08:11:05,926 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 2
+}
+2025-04-06 08:11:05,998 - INFO - RNN prediction probability: 0.6157862544059753
+2025-04-06 08:11:05,999 - INFO - Prediction response: {
+  "query": "Can I view the guidelines for requesting time off as an intern",
+  "inferred_data": {
+    "resource_type": "doc",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "The user is an intern (part-time employee) with a history of past violations.  While the request is routine, the intern's status and violation history suggest a more restrictive access level than 'public' is appropriate. The information requested is likely internal policy and not sensitive enough to warrant 'confidential' classification."
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 08:11:05,999 - INFO - 127.0.0.1 - - [06/Apr/2025 08:11:05] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:11:42,338 - INFO - Received user data for query 'I need access to the company dress code policy documen': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Shubham Mourya",
+  "email": "shubhammourya@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 2,
+  "resource_sensitivity": "",
+  "time_in_position": "6 months",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 08:11:44,020 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 2
+}
+2025-04-06 08:11:44,097 - INFO - RNN prediction probability: 0.6157862544059753
+2025-04-06 08:11:44,097 - INFO - Prediction response: {
+  "query": "I need access to the company dress code policy documen",
+  "inferred_data": {
+    "resource_type": "pdf",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "The user is an intern with a past violation history and part-time employee status.  While the dress code policy is not inherently confidential, the user's limited experience and past violations suggest a need for a more restricted access level.  The request appears to be a routine check rather than something urgent or for a specific client."
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 08:11:44,097 - INFO - 127.0.0.1 - - [06/Apr/2025 08:11:44] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:17:21,588 - INFO - Received user data for query 'Can I see the list of approved software applications for interns?"': {
+  "_id": "67f17cb4824dce811aecc4ed",
+  "name": "Sahil Sharma",
+  "email": "sahil.g.sharma7@gmail.com",
+  "department": "Engineering",
+  "employee_join_date": "2019-03-01T00:00:00.000Z",
+  "employee_status": "Part-time",
+  "last_security_training": "Never",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "1 Year",
+  "user_role": "Intern",
+  "created_at": "2025-04-05T21:22:06.931Z",
+  "updated_at": "2025-04-05T22:26:16.493Z",
+  "__v": 0
+}
+2025-04-06 08:17:23,170 - INFO - Processed request object for model: {
+  "user_role": "Intern",
+  "department": "Engineering",
+  "employee_status": "Part-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 08:17:23,381 - INFO - RNN prediction probability: 0.7695494294166565
+2025-04-06 08:17:23,391 - INFO - Prediction response: {
+  "query": "Can I see the list of approved software applications for interns?\"",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "The user is an intern (part-time employee) requesting a list of approved software.  While this information is relevant to their work, it's not generally something freely available to all employees.  The intern's part-time status and lack of security training also contribute to classifying the resource as 'restricted' rather than 'public'."
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Approved but flagged as anomaly",
+    "reason": "Approved but flagged as anomaly"
+  }
+}
+2025-04-06 08:17:23,391 - INFO - 127.0.0.1 - - [06/Apr/2025 08:17:23] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:18:04,053 - INFO - Received user data for query 'What were our Q2 financial results?': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 08:18:06,735 - INFO - Manager bypass activated: Bypass - Manager with 7.0 years experience requesting performance data
+2025-04-06 08:18:06,736 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 08:18:06,736 - INFO - Prediction response: {
+  "query": "What were our Q2 financial results?",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "Azlan is a Finance Manager with 7 years of experience and no past violations.  While Q2 financial results could be considered confidential, given his role, department, and experience, access to restricted information is appropriate.  The request is routine for his role."
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Bypass - Manager with 7.0 years experience requesting performance data",
+    "reason": "Bypass - Manager with 7.0 years experience requesting performance data"
+  }
+}
+2025-04-06 08:18:06,737 - INFO - 127.0.0.1 - - [06/Apr/2025 08:18:06] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:18:38,199 - INFO - Received user data for query 'What was our sales pitch to luminex?': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 08:18:39,694 - INFO - Manager bypass activated: Bypass - Manager with 7.0 years experience requesting performance data
+2025-04-06 08:18:39,694 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Client request",
+  "past_violations": 0
+}
+2025-04-06 08:18:39,695 - INFO - Prediction response: {
+  "query": "What was our sales pitch to luminex?",
+  "inferred_data": {
+    "resource_type": "presentation",
+    "request_reason": "Client request",
+    "resource_sensitivity": "restricted",
+    "reasoning": "Azlan is a Manager with 7 years of experience and 0 past violations.  While guideline 1 suggests preferring 'public' for Managers with >2 years experience, the query specifically requests a sales pitch to a client (Luminex).  Sales pitches often contain confidential information about pricing, strategy, and competitive positioning. Therefore, classifying this as 'restricted' balances Azlan's seniority with the sensitivity of the requested information. Access is limited to those involved in the Luminex account or sales strategy."
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Bypass - Manager with 7.0 years experience requesting performance data",
+    "reason": "Bypass - Manager with 7.0 years experience requesting performance data"
+  }
+}
+2025-04-06 08:18:39,696 - INFO - 127.0.0.1 - - [06/Apr/2025 08:18:39] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:20:46,061 - INFO - Received user data for query 'I need to see company's sensistive transactional information': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 08:20:47,463 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 08:20:47,565 - INFO - RNN prediction probability: 0.5699651837348938
+2025-04-06 08:20:47,565 - INFO - Prediction response: {
+  "query": "I need to see company's sensistive transactional information",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "Azlan is a Manager in the Finance department with 7 years of experience and no past violations.  While his role and experience suggest broader access, 'sensitive transactional information' inherently implies a level of restriction.  Therefore, 'restricted' is appropriate to balance access needs with data protection."
+  },
+  "final_decision": {
+    "approved": false,
+    "status": "Denied - Model prediction",
+    "reason": "Denied - Model prediction"
+  }
+}
+2025-04-06 08:20:47,566 - INFO - 127.0.0.1 - - [06/Apr/2025 08:20:47] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:25:26,460 - INFO - Received user data for query 'What were our Q1 financial results?': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 08:25:28,552 - INFO - Manager bypass activated: Bypass - Manager with 7.0 years experience requesting performance data
+2025-04-06 08:25:28,552 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 08:25:28,552 - INFO - Prediction response: {
+  "query": "What were our Q1 financial results?",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "Azlan is a Finance Manager with 7 years of experience and zero past violations.  While Q1 financial results could be considered confidential, given his role, department, and experience, access to this information is reasonable.  The 'restricted' classification limits access to the Finance department, aligning with typical data handling practices for financial results."
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Bypass - Manager with 7.0 years experience requesting performance data",
+    "reason": "Bypass - Manager with 7.0 years experience requesting performance data"
+  }
+}
+2025-04-06 08:25:28,554 - INFO - 127.0.0.1 - - [06/Apr/2025 08:25:28] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:26:33,385 - INFO - Received user data for query 'our Q1 financials': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 08:26:34,598 - INFO - Manager bypass activated: Bypass - Manager with 7.0 years experience requesting performance data
+2025-04-06 08:26:34,598 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 08:26:34,598 - INFO - Prediction response: {
+  "query": "our Q1 financials",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "Azlan is a Finance Manager with 7 years of experience and no past violations.  While Q1 financials are sensitive, his role and tenure justify access.  However, given the sensitivity of financial data, 'restricted' is more appropriate than 'public'."
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Bypass - Manager with 7.0 years experience requesting performance data",
+    "reason": "Bypass - Manager with 7.0 years experience requesting performance data"
+  }
+}
+2025-04-06 08:26:34,599 - INFO - 127.0.0.1 - - [06/Apr/2025 08:26:34] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:27:07,693 - INFO - Received user data for query 'our Q1 financials': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 08:27:09,004 - INFO - Manager bypass activated: Bypass - Manager with 7.0 years experience requesting performance data
+2025-04-06 08:27:09,005 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 08:27:09,005 - INFO - Prediction response: {
+  "query": "our Q1 financials",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "Azlan is a Manager in the Finance department with 7 years of experience and no past violations.  While Q1 financials are sensitive, his role and tenure justify access.  However, given the sensitivity of financial data, 'restricted' is more appropriate than 'public'."
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Bypass - Manager with 7.0 years experience requesting performance data",
+    "reason": "Bypass - Manager with 7.0 years experience requesting performance data"
+  }
+}
+2025-04-06 08:27:09,005 - INFO - 127.0.0.1 - - [06/Apr/2025 08:27:09] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:27:49,306 - INFO - Received user data for query 'I need Q1 financial results': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 08:27:50,778 - INFO - Manager bypass activated: Bypass - Manager with 7.0 years experience requesting performance data
+2025-04-06 08:27:50,778 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 08:27:50,779 - INFO - Prediction response: {
+  "query": "I need Q1 financial results",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "Azlan is a Finance Manager with 7 years of experience and no past violations.  Q1 financial results are typically considered restricted information, even for those in the Finance department. However, given his seniority and experience,  access is granted at the 'restricted' level.  A more senior role might justify 'public' access, but 'restricted' is a safer default for this level of information."
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Bypass - Manager with 7.0 years experience requesting performance data",
+    "reason": "Bypass - Manager with 7.0 years experience requesting performance data"
+  }
+}
+2025-04-06 08:27:50,779 - INFO - 127.0.0.1 - - [06/Apr/2025 08:27:50] "POST /predict HTTP/1.1" 200 -
+2025-04-06 08:28:39,541 - INFO - Received user data for query 'Compare Q1 vs Q2 performance': {
+  "_id": "67f1d1aa499f66e3f689e0b2",
+  "name": "Azlan",
+  "email": "azlankhawar@gmail.com",
+  "department": "Finance",
+  "employee_join_date": "2018-08-03T00:00:00.000Z",
+  "employee_status": "Full-time",
+  "last_security_training": "30th May 2023",
+  "past_violations": 0,
+  "resource_sensitivity": "",
+  "time_in_position": "7 years",
+  "user_role": "Manager",
+  "created_at": "2025-04-06T00:58:18.396Z",
+  "updated_at": "2025-04-06T00:58:18.403Z",
+  "__v": 0
+}
+2025-04-06 08:28:40,849 - INFO - Manager bypass activated: Bypass - Manager with 7.0 years experience requesting performance data
+2025-04-06 08:28:40,850 - INFO - Processed request object for model: {
+  "user_role": "Manager",
+  "department": "Finance",
+  "employee_status": "Full-time",
+  "resource_sensitivity": "restricted",
+  "request_reason": "Routine check",
+  "past_violations": 0
+}
+2025-04-06 08:28:40,851 - INFO - Prediction response: {
+  "query": "Compare Q1 vs Q2 performance",
+  "inferred_data": {
+    "resource_type": "spreadsheet",
+    "request_reason": "Routine check",
+    "resource_sensitivity": "restricted",
+    "reasoning": "Azlan is a Manager in the Finance department with 7 years of experience and no past violations.  While his role and experience suggest 'public' access, Q1 vs Q2 performance comparisons often contain sensitive financial data that should not be freely shared with all employees. Therefore, 'restricted' access within the Finance department is appropriate."
+  },
+  "final_decision": {
+    "approved": true,
+    "status": "Bypass - Manager with 7.0 years experience requesting performance data",
+    "reason": "Bypass - Manager with 7.0 years experience requesting performance data"
+  }
+}
+2025-04-06 08:28:40,851 - INFO - 127.0.0.1 - - [06/Apr/2025 08:28:40] "POST /predict HTTP/1.1" 200 -
